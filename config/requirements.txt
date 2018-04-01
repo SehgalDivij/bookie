@@ -1,1 +1,2 @@
 djangorestframework==3.7.1
+djangae==0.9.10
