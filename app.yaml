@@ -1,0 +1,15 @@
+# Tutorials say this should work. gcloud sdk says it shouldn't be there and use a specific project as current project.
+# See why this discrepancy is there.
+#application: bookie
+#version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: bookie.wsgi.application
+
+libraries:
+- name: django
+  version: "1.9"
