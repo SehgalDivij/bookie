@@ -15,5 +15,9 @@ handlers:
   login: admin
 
 libraries:
+
 - name: django
   version: "1.9"
+
+- name: ssl
+  version: latest

@@ -1,5 +1,11 @@
 import os
 from djangae.settings_base import *
+import sys
+import logging
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.ERROR)
+settings_logger = logging.getLogger(__name__)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,6 +33,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'api'
 ]
+
+from telegram import Bot
+from telegram.ext import Dispatcher
 
 MIDDLEWARE = [
     'djangae.contrib.security.middleware.AppEngineSecurityMiddleware',
@@ -95,3 +104,34 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'djangae.db.backends.appengine'
+    }
+}
+CACHES = {
+    'default': {
+        'BACKEND': 'bookie.backends.GaeMemcachedCache',
+    }
+}
+
+from .logger_config import *
+
+TELEGRAM_TOKEN = '580485936:AAH3ktarjxpjhfoXlGr2_1oA4mxXOUXyk0c'
+
+
+BOT = Bot(TELEGRAM_TOKEN)
+DISPATCHER = Dispatcher(BOT, None, workers=0)
+
+# Setup Bot States
+INPUT_DAY = 0
+INPUT_TIME = 1
+INPUT_NUM_PEOPLE = 2
+INPUT_EMAIL = 3
+INPUT_REMARKS = 4
+VIEW_HISTORY = 5
+LOCATION = 6
+SHOW_CONFIRMATION_DIALOG = 7
+ACCEPT_CONFIRMATION = 8
+CONTACT_RESTAURANT = 9
