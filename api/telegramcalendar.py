@@ -30,8 +30,10 @@ def create_calendar(year=None, month=None):
     :return: Returns the InlineKeyboardMarkup object with the calendar.
     """
     now = datetime.datetime.now()
-    if year == None: year = now.year
-    if month == None: month = now.month
+    if year is None:
+        year = now.year
+    if month is None:
+        month = now.month
     data_ignore = create_callback_data("IGNORE", year, month, 0)
     keyboard = []
     # First row - Month and Year

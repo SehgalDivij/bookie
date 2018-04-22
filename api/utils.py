@@ -6,12 +6,10 @@ def fetch_from_cache(chat_id):
     Fetch current cache for a chat identified by a chat_id.
     :return:
     """
-    chat_cache = cache.get('chat_id')
+    chat_cache = cache.get(chat_id)
     if chat_cache is not None:
         return chat_cache
-    else:
-        cache.set('chat_id', {}, 600)
-        return {}
+    return None
 
 
 def update_cache(chat_id, data=None, expiry=600):
@@ -32,4 +30,16 @@ def add_to_cache(chat_id, data=None):
     :param expiry:
     :return:
     """
+    print('adding following data to cache')
+    print('Key: %s' % chat_id)
+    print('Data: {0}'.format(data))
     cache.set(chat_id, data, 600)
+    print(cache.get(chat_id))
+
+
+def invalidate_in_cache(chat_id=None):
+    """
+    Upon cancellation action/ new start action, cancel item in cache.
+    :return:
+    """
+    cache.delete(chat_id)

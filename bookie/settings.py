@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'djangae.contrib.contenttypes',
     'djangae.contrib.security',
     'django.contrib.sessions',
+    'background_task',
     'rest_framework',
     'api'
 ]
@@ -48,23 +49,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bookie.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
 
 WSGI_APPLICATION = 'bookie.wsgi.application'
 
@@ -105,11 +89,30 @@ REST_FRAMEWORK = {
     )
 }
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+from djangae.db.backends import appengine
+
 DATABASES = {
     'default': {
         'ENGINE': 'djangae.db.backends.appengine'
     }
 }
+
 CACHES = {
     'default': {
         'BACKEND': 'bookie.backends.GaeMemcachedCache',
@@ -120,11 +123,10 @@ from .logger_config import *
 
 TELEGRAM_TOKEN = '580485936:AAH3ktarjxpjhfoXlGr2_1oA4mxXOUXyk0c'
 
-
 BOT = Bot(TELEGRAM_TOKEN)
 DISPATCHER = Dispatcher(BOT, None, workers=0)
 
-# Setup Bot States
+# Setup Bot States.
 INPUT_DAY = 0
 INPUT_TIME = 1
 INPUT_NUM_PEOPLE = 2
@@ -135,3 +137,21 @@ LOCATION = 6
 SHOW_CONFIRMATION_DIALOG = 7
 ACCEPT_CONFIRMATION = 8
 CONTACT_RESTAURANT = 9
+INPUT_TABLE_NUMBER = 10
+NO_TABLES_AVAILABLE = 11
+EMAIL_OPTIONS = 12
+ANY_REMARKS = 13
+# Setup Bot States Over
+
+# OUTGOING EMAIL DETAILS
+EMAIL_HOST = 'smtp.sendgrid.net'
+# This is no longer needed.
+EMAIL_PORT = 587
+# This is no longer needed.
+EMAIL_HOST_USER = 'apikey'
+# SENDGRID API KEY is the same as EMAIL_HOST_PASSWORD
+# EMAIL_HOST_PASSWORD is no longer needed.
+SENDGRID_API_KEY = EMAIL_HOST_PASSWORD = \
+    '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'
+FROM_EMAIL = 'noreply@thebistro.com'
+CONFIRMATION_SUBJECT = 'The Bistro | Order Confirmation'

@@ -1,0 +1,15 @@
+indexes:
+- kind: TableReservation
+  properties:
+  - name: table
+    direction: asc
+  - name: start_time
+    direction: asc
+- kind: User
+  properties:
+  - name: id
+  - name: email
+- kind: Reservation
+  properties:
+  - name: user_id
+  - name: start_time
