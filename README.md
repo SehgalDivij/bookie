@@ -4,7 +4,7 @@
 
 - This repository contains the source code and a brief documentation for a `Restaurant Reservation System` built using Django, Telegram, Google App Engine, Google Datastore and Google Memcached, among others.
 
-- This assignment mainly utilizes `(including, but not limited to)`following technologies:
+- The bot was built mainly using following tech/libraries:
 
 ```
     1. Telegram's APIs - Using python-telegram-bot
@@ -48,4 +48,4 @@
 
 - Please install the `Telegram` messaging app on your device and search for `@bistro_bookie_bot` to get started with your reservation.
 
-- User interaction takes place using commands and User Inputs are asked for, wherever needed.
+- User interaction takes place using commands and User Inputs are requested, wherever needed.
