@@ -1,4 +1,4 @@
-#### WARNING: This is a rough draft. Formal steps and terms have been used at certain places, but not all.
+#### NOTE: This is a rough draft. Formal steps and terms have been used at certain places, but not all.
 
 ### Bistro_Bookie
 
